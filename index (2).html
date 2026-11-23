@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AyitiMache</title>
+<style>
+:root{--navy:#16224a;--navy2:#243b6b;--or:#f28c28;--bg:#f4f6fb;--mut:#6b7590;--line:#e6eaf3}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--navy);padding-bottom:90px}
+button{border:0;font:inherit;font-weight:700;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--or)}
+header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--or);color:#fff;font-weight:800;font-size:23px;display:grid;place-items:center}
+.brand{flex:1;line-height:1.1}.brand b{font-size:20px;font-weight:800}.brand i{font-style:normal;color:var(--or)}
+.brand small{display:block;font-size:8.5px;letter-spacing:.16em;color:var(--mut);font-weight:700;margin-top:3px}
+.lg{display:flex;background:#eef1f8;border-radius:20px;padding:2px}
+.lg button{padding:6px 9px;border-radius:18px;background:none;color:var(--mut);font-size:12px}
+.lg .on{background:var(--navy);color:#fff}
+.btn{background:var(--or);color:#fff;padding:12px 18px;border-radius:14px;font-size:16px}
+.btn.sm{padding:8px 12px;font-size:14px;border-radius:20px}
+.btn.navy{background:var(--navy)}.btn.red{background:#ef476f;padding:6px 10px;font-size:13px;border-radius:10px}
+.hero{margin:16px;border-radius:28px;background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:26px 22px 56px;display:grid;grid-template-columns:1fr auto;gap:6px 8px}
+.eb{font-size:12px;letter-spacing:.16em;font-weight:800}
+.hero .eb{opacity:.85;grid-column:1/3}
+.hero h1{font-size:44px;line-height:.95;margin:6px 0;letter-spacing:-.03em;align-self:center}
+.hero h1 em{display:block;font-style:normal;color:#ffab5e}
+.bag{width:84px;height:100px;background:#fdeedd;border-radius:24px;transform:rotate(6deg);display:grid;place-items:center;font-size:44px;align-self:center}
+.hero p{grid-column:1/3;font-size:16px;line-height:1.6;margin:8px 0 14px;opacity:.92}
+.hero .btn{grid-column:1/3;justify-self:start}
+.search{margin:-34px 16px 0;position:relative;background:#fff;border-radius:20px;padding:10px;display:flex;gap:8px;box-shadow:0 8px 24px rgba(22,34,74,.14)}
+.search input{flex:1;min-width:0;border:0;font-size:16px;padding:8px 10px;margin:0;outline:none;background:none}
+.sec{padding:0 16px;margin-top:26px}
+.sec .eb{color:var(--or)}.sec h2{margin:4px 0 12px;font-size:24px;letter-spacing:-.02em}
+.cats{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.cat{flex:0 0 94px;background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px 6px;text-align:center;color:var(--navy);font-size:13px}
+.cat span{display:block;font-size:26px;margin-bottom:4px}.cat.on{border-color:var(--or);background:#fff4e8}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+.card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
+.card img,.ph{width:100%;aspect-ratio:4/3;object-fit:cover;background:#fdeedd;display:grid;place-items:center;font-size:34px}
+.card .b{padding:10px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card h3{margin:0;font-size:15px}.card p{margin:0;font-size:13px;color:var(--mut);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pr{color:var(--or);font-weight:800}.mut{color:var(--mut);font-size:13px}
+.card .btn{margin-top:auto;padding:9px;font-size:14px}
+.panel{background:#fff;border-radius:20px;padding:16px;margin:16px;border:1px solid var(--line)}
+.panel h2{margin:0 0 8px;font-size:19px}
+input,select,textarea{width:100%;padding:12px;margin:6px 0;border:2px solid var(--line);border-radius:12px;font:inherit;font-size:16px;color:var(--navy);background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--or);outline:none}
+.warn{background:#fff4e0;border-left:5px solid var(--or)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+.conv{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;margin:8px 0;color:var(--navy);display:block}
+.conv small{display:block;font-weight:500;color:var(--mut);margin-top:3px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.stat{border-radius:18px;padding:14px;color:#fff;font-size:14px}.stat b{display:block;font-size:28px}
+.s1{background:linear-gradient(135deg,#f28c28,#ff6b35)}.s2{background:linear-gradient(135deg,#243b6b,#3a5fb0)}
+.s3{background:linear-gradient(135deg,#00a896,#2ec4b6)}.s4{background:linear-gradient(135deg,#7b5cff,#b5179e)}
+.s5{background:linear-gradient(135deg,#ef476f,#ff8fa3)}.s6{background:linear-gradient(135deg,#2d6a4f,#52b788)}
+.bar{height:14px;border-radius:8px;min-width:6px;margin:4px 0 10px}
+#cf{margin:0 0 12px}
+.card,.rc{cursor:pointer}
+.im{position:relative}
+.hrt{position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:50%;background:#fff;padding:0;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.dl{display:inline-block;background:#e6f7ef;color:#1b7a4b;border-radius:20px;padding:3px 9px;font-size:12px;font-weight:700}
+.tag{background:#fff4e8;color:var(--or);padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.chk{display:flex;align-items:center;gap:10px;margin:8px 0;font-weight:600}.chk input{width:22px;height:22px;margin:0}
+#det{display:none;position:fixed;inset:0;background:var(--bg);z-index:9;flex-direction:column;overflow-y:auto}
+#dh{display:flex;align-items:center;gap:10px;padding:12px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+#dh button{background:#eef1f8;color:var(--navy);padding:8px 12px;border-radius:10px}
+.dimg{width:100%;max-height:320px;object-fit:cover;display:block}
+.dbody{padding:16px;display:flex;flex-direction:column;gap:10px}.dbody .pr{font-size:26px}
+.dact{display:flex;gap:10px}.dact .btn{flex:1}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.car::-webkit-scrollbar{display:none}
+.rc{flex:0 0 88%;scroll-snap-align:start;display:flex;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;height:132px}
+.rc img,.rc .ph{width:42%;height:100%;aspect-ratio:auto;object-fit:cover;flex:none}
+.rb{padding:10px;display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.rb h3{margin:0;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rb .btn{margin-top:auto;padding:8px;font-size:14px}
+#int{display:none;position:fixed;inset:0;background:rgba(22,34,74,.65);z-index:20;align-items:center;justify-content:center;padding:16px}
+.intb{background:#fff;border-radius:24px;padding:20px;width:100%;max-width:420px}
+.intb h2{margin:0 0 4px;font-size:21px}
+.intg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.intg .cat{flex:none}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:6;background:#fff;border-top:1px solid var(--line);display:flex;padding:8px 4px calc(8px + env(safe-area-inset-bottom))}
+nav button{flex:1;background:none;color:var(--mut);font-size:12px;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button{font-weight:600;gap:3px}
+nav svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav .on{color:var(--or)}
+nav .pub{color:var(--navy);margin-top:-30px}nav .pub.on{color:var(--or)}
+.circ{width:60px;height:60px;border-radius:50%;background:var(--or);display:grid;place-items:center;box-shadow:0 6px 16px rgba(242,140,40,.45);border:4px solid #fff}
+.circ svg{stroke:#fff;stroke-width:2.6;width:28px;height:28px}
+#chat{display:none;position:fixed;inset:0;background:var(--bg);flex-direction:column;z-index:10}
+#ch{padding:14px;background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#ch button{background:rgba(255,255,255,.2);color:#fff;padding:8px 12px;border-radius:10px}
+#cm{flex:1;overflow-y:auto;padding:12px}
+.m{max-width:78%;padding:9px 13px;border-radius:16px;margin:6px 0;background:#fff;word-wrap:break-word}
+.me{background:var(--or);color:#fff;margin-left:auto}
+#cb{display:flex;gap:6px;padding:8px;background:#fff;border-top:1px solid var(--line)}#cb input{margin:0}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">A</div>
+  <div class="brand"><b>Ayiti<i>Mache</i></b><small>ACHTE. VANN. PWOGRESE.</small></div>
+  <div class="lg"><button id="bfr" onclick="setLang('fr')">FR</button><button id="bht" onclick="setLang('ht')">KR</button></div>
+  <button class="btn sm" id="hb" onclick="go('space')"></button>
+</header>
+
+<section id="home">
+  <div class="hero">
+    <div class="eb"><span data-i="eb"></span> 🇭🇹</div>
+    <h1>Achte.<br>Vann.<em>Pwogrese.</em></h1><div class="bag">🛍️</div>
+    <p data-i="sub"></p>
+    <button class="btn" onclick="scrollList()" data-i="explore"></button>
+  </div>
+  <div class="search"><input id="q" data-ph="q" oninput="setQ(this.value)"><button class="btn" onclick="scrollList()" data-i="find"></button></div>
+  <div class="sec" id="forsec" style="display:none"><div class="eb" data-i="for_you"></div><h2 data-i="for_you_t"></h2><div class="car" id="car"></div></div>
+  <div class="sec"><div class="eb" data-i="browse"></div><h2 data-i="cats_t"></h2><div class="cats" id="cats"></div></div>
+  <div class="sec" id="listsec"><h2 data-i="ads_t"></h2><select id="cf" onchange="setCity(this.value)"></select><div class="grid" id="list"></div></div>
+</section>
+<section id="space" style="display:none"></section>
+<section id="msgs" style="display:none"></section>
+<section id="admin" style="display:none"></section>
+
+<div id="det"><div id="dh"><button onclick="closeDet()">←</button><b id="dt"></b></div><div id="db2"></div></div>
+<div id="int"><div class="intb"><h2 id="it"></h2><p class="mut" id="is"></p><div class="intg" id="ig"></div><button class="btn" id="ib" onclick="saveInt()"></button> <button class="btn navy" id="il" onclick="skipInt()"></button></div></div>
+<nav id="nav"></nav>
+<div id="chat"><div id="ch"><b id="ct"></b><button onclick="closeChat()">✖</button></div><div id="cm"></div><div id="cb"><input id="cx" data-ph="write_ph"><button class="btn" onclick="sendMsg()" data-i="send"></button></div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,sendEmailVerification,updateProfile,GoogleAuthProvider,signInWithPopup,getAdditionalUserInfo} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,collection,addDoc,setDoc,doc,deleteDoc,updateDoc,increment,arrayUnion,arrayRemove,onSnapshot,query,where,orderBy,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* ===== COLLE ICI TA CONFIG FIREBASE ===== */
+const firebaseConfig={apiKey:"AIzaSyDR5YLDoYDuxd08TKCcSHagBeQVkgsjJ_U",authDomain:"ayitimache-95563.firebaseapp.com",projectId:"ayitimache-95563",storageBucket:"ayitimache-95563.firebasestorage.app",messagingSenderId:"826486314023",appId:"1:826486314023:web:bb4865e490c87770f9aa02"};
+const ADMIN="esaiejerome1@gmail.com";
+const ready=firebaseConfig.apiKey!=="COLLE_ICI";
+
+const T={
+fr:{login:"Se connecter",eb:"LE MARCHÉ D'ICI",sub:"Découvrez des produits près de chez vous et faites grandir le commerce local. Tout Haïti au même endroit.",explore:"Explorer les annonces →",q:"Que recherchez-vous ?",find:"Rechercher",browse:"PARCOURIR",cats_t:"Explorer les catégories",all:"Tout",vet:"Vêtements",elec:"Électronique",maison:"Maison",alim:"Alimentation",autre:"Autres",ads_t:"Annonces récentes",none:"Aucune annonce.",by:"par",write:"Écrire",home:"Accueil",space:"Mon espace",messages:"Messages",admin:"Admin",account:"Créer un compte ou se connecter",name_ph:"Ton nom ou pseudo",email_ph:"Adresse e-mail",pass_ph:"Mot de passe (6 caractères min.)",signup:"Créer mon compte",logout:"Déconnexion",verify:"Vérifie ton e-mail : clique sur le lien reçu.",resend:"Renvoyer le lien",sent:"E-mail envoyé.",need_login:"Connecte-toi d'abord.",e_exists:"Cet e-mail a déjà un compte.",e_cred:"E-mail ou mot de passe incorrect.",e_weak:"Mot de passe trop court (6 minimum).",e_mail:"Adresse e-mail invalide.",e_gen:"Erreur. Réessaie.",e_name:"Entre ton nom.",no_fb:"Firebase n'est pas encore configuré.",pub_t:"Publier une annonce",title_ph:"Titre (ex : Souliers Nike)",price_ph:"Prix en HTG",desc_ph:"Description",publish:"Publier",need_f:"Le titre et le prix sont obligatoires.",mine:"Mes annonces",del:"Supprimer",confirm:"Supprimer cette annonce ?",no_conv:"Aucune conversation.",write_ph:"Écris un message...",send:"Envoyer",first:"Écris le premier message.",h_num:"[numéro masqué]",h_mail:"[e-mail masqué]",users:"Utilisateurs",ads:"Annonces",msgn:"Messages",convs:"Conversations",new7:"Nouveaux inscrits (7 j)",value:"Valeur totale (HTG)",by_cat:"Annonces par catégorie",sellers:"Meilleurs vendeurs",contacted:"Annonces les plus contactées",moderate:"Modération",nothing:"Rien pour l'instant.",deleted:"Annonce supprimée",int_t:"Choisis tes centres d'intérêt",int_sub:"Les produits qui t'intéressent s'afficheront en premier.",int_save:"Continuer",int_skip:"Plus tard",int_edit:"Mes centres d'intérêt",edit:"Modifier",for_you:"POUR TOI",for_you_t:"Selon tes centres d'intérêt",deliv:"Livraison disponible",deliv_q:"Je propose la livraison",dash_t:"Tableau de bord vendeur",views:"Vues",favs_n:"Favoris",contacts:"Contacts",favs_t:"Mes favoris",no_favs:"Aucun favori pour l'instant.",contact:"Contacter le vendeur",your_ad:"C'est ton annonce.",fav:"Favori",city_ph:"Ville *",all_cities:"Toutes les villes",need_city:"Choisis la ville de l'annonce.",google:"Continuer avec Google",or:"ou",nav_explore:"Explorer",nav_profile:"Profil"},
+ht:{login:"Konekte",eb:"MACHE ISIT LA",sub:"Jwenn pwodwi toupre w epi ede komès lokal la grandi. Tout Ayiti nan menm kote.",explore:"Gade anons yo →",q:"Kisa w ap chèche ?",find:"Chèche",browse:"PARKOU",cats_t:"Eksplore kategori yo",all:"Tout",vet:"Rad",elec:"Elektwonik",maison:"Kay",alim:"Manje",autre:"Lòt",ads_t:"Dènye anons yo",none:"Pa gen anons.",by:"pa",write:"Ekri",home:"Akèy",space:"Espas mwen",messages:"Mesaj",admin:"Admin",account:"Kreye yon kont oswa konekte",name_ph:"Non ou oswa metinon ou",email_ph:"Adrès imèl",pass_ph:"Modpas (omwen 6 karaktè)",signup:"Kreye kont mwen",logout:"Dekonekte",verify:"Verifye imèl ou : klike sou lyen ou resevwa a.",resend:"Voye lyen an ankò",sent:"Imèl la voye.",need_login:"Konekte w anvan.",e_exists:"Imèl sa a gen yon kont deja.",e_cred:"Imèl oswa modpas la pa bon.",e_weak:"Modpas la two kout (omwen 6).",e_mail:"Adrès imèl la pa valab.",e_gen:"Gen yon erè. Eseye ankò.",e_name:"Antre non ou.",no_fb:"Firebase poko konfigire.",pub_t:"Pibliye yon anons",title_ph:"Tit (egz : Soulye Nike)",price_ph:"Pri an HTG",desc_ph:"Deskripsyon",publish:"Pibliye",need_f:"Tit ak pri a obligatwa.",mine:"Anons mwen yo",del:"Efase",confirm:"Efase anons sa a ?",no_conv:"Pa gen konvèsasyon.",write_ph:"Ekri yon mesaj...",send:"Voye",first:"Ekri premye mesaj la.",h_num:"[nimewo kache]",h_mail:"[imèl kache]",users:"Itilizatè",ads:"Anons",msgn:"Mesaj",convs:"Konvèsasyon",new7:"Nouvo enskri (7 jou)",value:"Valè total (HTG)",by_cat:"Anons pa kategori",sellers:"Pi bon machann yo",contacted:"Anons ki resevwa pi plis mesaj",moderate:"Moderasyon",nothing:"Pa gen anyen pou kounye a.",deleted:"Anons efase",int_t:"Chwazi sa w renmen yo",int_sub:"Pwodwi ki enterese w yo ap parèt an premye.",int_save:"Kontinye",int_skip:"Pita",int_edit:"Sa m renmen yo",edit:"Modifye",for_you:"POU OU",for_you_t:"Dapre sa w renmen",deliv:"Livrezon disponib",deliv_q:"Mwen ofri livrezon",dash_t:"Tablo bò machann",views:"Vizit",favs_n:"Favori",contacts:"Kontak",favs_t:"Favori mwen yo",no_favs:"Poko gen favori.",contact:"Kontakte machann nan",your_ad:"Se anons ou a.",fav:"Favori",city_ph:"Vil *",all_cities:"Tout vil yo",need_city:"Chwazi vil anons lan.",google:"Kontinye ak Google",or:"oswa",nav_explore:"Eksplore",nav_profile:"Pwofil"}
+};
+const CITY={pap:["Port-au-Prince","Pòtoprens"],pv:["Pétion-Ville","Petyonvil"],delmas:["Delmas","Delma"],carrefour:["Carrefour","Kafou"],tabarre:["Tabarre","Tabarè"],cdb:["Croix-des-Bouquets","Kwadèbouke"],cap:["Cap-Haïtien","Okap"],gon:["Gonaïves","Gonayiv"],cayes:["Les Cayes","Okay"],jac:["Jacmel","Jakmèl"],jer:["Jérémie","Jeremi"],hin:["Hinche","Ench"],sm:["Saint-Marc","Sen Mak"],pg:["Petit-Goâve","Ti Goave"],leo:["Léogâne","Leyogàn"],fl:["Fort-Liberté","Fò Libète"],pdp:["Port-de-Paix","Pòdepè"],mir:["Miragoâne","Miragwàn"],oua:["Ouanaminthe","Wanament"],autre:["Autre ville","Lòt vil"]};
+const cityName=c=>CITY[c]?CITY[c][lang==="ht"?1:0]:"";
+const cityOpts=()=>Object.keys(CITY).map(k=>`<option value="${k}">${cityName(k)}</option>`).join("");
+const CATS=["vet","elec","maison","alim","autre"],ICON={all:"✦",vet:"👟",elec:"📱",maison:"🏠",alim:"🍎",autre:"✨"};
+const COL={vet:"#7b5cff",elec:"#243b6b",maison:"#f28c28",alim:"#00a896",autre:"#ef476f"};
+const ERR={"auth/email-already-in-use":"e_exists","auth/invalid-credential":"e_cred","auth/wrong-password":"e_cred","auth/user-not-found":"e_cred","auth/weak-password":"e_weak","auth/invalid-email":"e_mail"};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let lang=localStorage.getItem("am_lang")||"fr";const t=k=>T[lang][k]||T.fr[k]||k;
+let cityF="all",favs=[],statsMap={},interests=[],auth,db,user=null,ads=[],msgs=[],allUsers=[],photo="",cur=null,unsubs=[],view="home",q="",cat="all";
+const isAdmin=()=>!!(user&&user.emailVerified&&user.email&&user.email.toLowerCase()===ADMIN);
+const ms=x=>x?.toMillis?.()||Date.now();
+
+if(ready){const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getFirestore(app);
+  onSnapshot(query(collection(db,"annonces"),orderBy("createdAt","desc")),s=>{ads=s.docs.map(d=>({id:d.id,...d.data()}));drawList();drawFor();drawMine();drawDash();drawFavs();drawDet();drawMsgs();drawAdmin()});
+  onAuthStateChanged(auth,async u=>{user=u;if(u)await u.reload().catch(()=>{});subscribe();if(view==="admin"&&!isAdmin())view="home";apply()});
+  window.addEventListener("focus",async()=>{if(user&&!user.emailVerified){await user.reload();if(user.emailVerified){await user.getIdToken(true);subscribe();apply()}}});
+}
+function subscribe(){
+  unsubs.forEach(u=>u());unsubs=[];msgs=[];allUsers=[];interests=[];favs=[];statsMap={};
+  if(!user){drawFor();return}
+  unsubs.push(onSnapshot(doc(db,"users",user.uid),s=>{if(!s.exists())return;const d=s.data();interests=d.interests||[];favs=d.favs||[];drawFor();drawList();drawFavs();drawDet();if(!Array.isArray(d.interests))openInt()},()=>{}));
+  unsubs.push(onSnapshot(query(collection(db,'stats'),where('ownerUid','==',user.uid)),s=>{statsMap={};s.docs.forEach(d=>statsMap[d.id]=d.data());drawDash()},()=>{}));
+  const A=new Map(),B=new Map(),M=collection(db,"msgs");
+  const merge=()=>{msgs=[...new Map([...A,...B]).values()].sort((a,b)=>ms(a.createdAt)-ms(b.createdAt));drawMsgs();drawChat();drawMine();drawDash();drawAdmin()};
+  const watch=(qq,Mp)=>unsubs.push(onSnapshot(qq,s=>{Mp.clear();s.docs.forEach(d=>Mp.set(d.id,{id:d.id,...d.data()}));merge()},()=>{}));
+  if(isAdmin()){watch(M,A);unsubs.push(onSnapshot(collection(db,"users"),s=>{allUsers=s.docs.map(d=>({id:d.id,...d.data()}));drawAdmin()},()=>{}))}
+  else{watch(query(M,where("buyerUid","==",user.uid)),A);watch(query(M,where("sellerUid","==",user.uid)),B)}
+}
+
+window.setLang=l=>{lang=l;localStorage.setItem("am_lang",l);document.documentElement.lang=l==="ht"?"ht":"fr";apply()};
+window.setQ=v=>{q=v.toLowerCase();drawList()};
+window.scrollList=()=>$("listsec").scrollIntoView({behavior:"smooth"});
+window.setCat=c=>{cat=c;drawCats();drawList()};
+
+function apply(){
+  document.querySelectorAll("[data-i]").forEach(e=>e.textContent=t(e.dataset.i));
+  document.querySelectorAll("[data-ph]").forEach(e=>e.placeholder=t(e.dataset.ph));
+  $("bfr").className=lang==="fr"?"on":"";$("bht").className=lang==="ht"?"on":"";
+  $("hb").textContent=user?"👤 "+esc((user.displayName||"").split(" ")[0]).slice(0,10):t("login");
+  drawNav();drawCats();drawCities();drawList();drawFor();drawSpace();drawMsgs();drawAdmin();show();
+}
+window.go=v=>{if(v==="admin"&&!isAdmin())v="home";view=v;navKey={home:"home",messages:"messages",space:"profile",admin:"profile"}[v]||"home";show();scrollTo(0,0)};
+function show(){
+  if(view==="admin"&&!isAdmin())view="home";
+  ["home","space","msgs","admin"].forEach(s=>$(s).style.display=(s===view||(s==="msgs"&&view==="messages"))?"block":"none");
+  $("msgs").style.display=view==="messages"?"block":"none";
+  drawNav();
+}
+const ICO={
+home:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>',
+explore:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>',
+publish:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+messages:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+profile:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>'};
+let navKey="home";
+function drawNav(){
+  const it=[["home","home"],["explore","nav_explore"],["publish","publish"],["messages","messages"],["profile","nav_profile"]];
+  $("nav").innerHTML=it.map(([k,l])=>k==="publish"
+    ?`<button class="pub ${navKey===k?"on":""}" onclick="navTo('${k}')"><span class="circ">${ICO[k]}</span>${t(l)}</button>`
+    :`<button class="${navKey===k?"on":""}" onclick="navTo('${k}')">${ICO[k]}${t(l)}</button>`).join("");
+}
+window.navTo=k=>{
+  if(k==="home")go("home");
+  else if(k==="explore"){go("home");setTimeout(scrollList,60)}
+  else if(k==="publish"){go("space");if(!user)alert(t("need_login"));else setTimeout(()=>{const e=$("pubp");if(e)e.scrollIntoView({behavior:"smooth"})},60)}
+  else if(k==="messages")go("messages");
+  else go("space");
+  navKey=k;drawNav();
+};
+function drawCats(){
+  $("cats").innerHTML=["all",...CATS].map(c=>`<button class="cat ${cat===c?"on":""}" onclick="setCat('${c}')"><span>${ICON[c]}</span>${t(c)}</button>`).join("");
+}
+function drawList(){
+  const l=ads.filter(a=>(cat==="all"||a.cat===cat)&&(cityF==="all"||a.city===cityF)&&(!q||(a.titre+" "+a.desc).toLowerCase().includes(q))).sort((a,b)=>(interests.includes(a.cat)?0:1)-(interests.includes(b.cat)?0:1));
+  $("list").innerHTML=l.map(a=>{
+    const mine=user&&a.ownerUid===user.uid;
+    return `<div class="card" onclick="openDet('${a.id}')"><div class="im">${a.photo?`<img src="${a.photo}" alt="">`:`<div class="ph">${ICON[a.cat]||"🛍️"}</div>`}${mine?"":`<button class="hrt" aria-label="${t("fav")}" onclick="event.stopPropagation();toggleFav('${a.id}')">${heart(a.id)}</button>`}</div><div class="b"><h3>${esc(a.titre)}</h3><div class="pr">${esc(a.prix)} HTG</div><div class="mut">${t(a.cat)} · ${t("by")} ${esc(a.ownerName)}</div>${a.city?`<div class="mut">📍 ${cityName(a.city)}</div>`:""}${a.delivery?`<span class="dl">🚚 ${t("deliv")}</span>`:""}</div></div>`;
+  }).join("")||`<p class="mut">${t("none")}</p>`;
+}
+
+/* ---- Compte ---- */
+function drawSpace(){
+  let h="";
+  if(!ready)h+=`<div class="panel warn">${t("no_fb")}</div>`;
+  if(!user)h+=`<div class="panel"><h2>${t("account")}</h2><input id="nom" placeholder="${t("name_ph")}"><input id="em" type="email" placeholder="${t("email_ph")}"><input id="pw" type="password" placeholder="${t("pass_ph")}"><button class="btn" onclick="signup()">${t("signup")}</button> <button class="btn navy" onclick="login()">${t("login")}</button><div class="mut" style="text-align:center;margin:12px 0">${t("or")}</div><button class="btn" style="width:100%;background:#fff;color:var(--navy);border:2px solid var(--line)" onclick="google()"><b style="color:#4285f4">G</b> ${t("google")}</button></div>`;
+  else{
+    h+=`<div class="panel row"><span>👤 <b>${esc(user.displayName)}</b><br><span class="mut">${esc(user.email)}</span></span><button class="btn red" onclick="logout()">${t("logout")}</button></div>`;
+    if(isAdmin())h+=`<div class="panel row"><span>📊 ${t("admin")}</span><button class="btn navy" onclick="go('admin')">${t("admin")}</button></div>`;
+    if(!user.emailVerified)h+=`<div class="panel warn">${t("verify")}<br><br><button class="btn navy" onclick="resend()">${t("resend")}</button></div>`;
+    h+=`<div class="panel"><h2>${t("dash_t")}</h2><div id="dash"></div></div><div class="panel"><h2>❤️ ${t("favs_t")}</h2><div id="favl"></div></div><div class="panel row"><span>⭐ ${t("int_edit")}</span><button class="btn navy" onclick="openInt()">${t("edit")}</button></div><div class="panel" id="pubp"><h2>${t("pub_t")}</h2><input id="ti" placeholder="${t("title_ph")}"><input id="pr" type="number" placeholder="${t("price_ph")}"><select id="ca">${CATS.map(c=>`<option value="${c}">${t(c)}</option>`).join("")}</select><select id="ci"><option value="">${t("city_ph")}</option>${cityOpts()}</select><textarea id="de" rows="3" placeholder="${t("desc_ph")}"></textarea><label class="chk"><input type="checkbox" id="dv"> 🚚 ${t("deliv_q")}</label><input id="ph" type="file" accept="image/*" onchange="pickPhoto(this)"><button class="btn" onclick="publish()">${t("publish")}</button></div><div class="panel"><h2>${t("mine")}</h2><div id="mine"></div></div>`;
+  }
+  $("space").innerHTML=h;drawMine();drawDash();drawFavs();
+}
+function drawMine(){
+  const e=$("mine");if(!e||!user)return;
+  e.innerHTML=ads.filter(a=>a.ownerUid===user.uid).map(a=>`<div class="row"><span>${esc(a.titre)}<br><span class="pr">${esc(a.prix)} HTG</span></span><button class="btn red" onclick="delAd('${a.id}')">${t("del")}</button></div>`).join("")||`<p class="mut">${t("none")}</p>`;
+}
+const fail=e=>alert(t(ERR[e.code]||"e_gen"));
+window.signup=async()=>{
+  if(!ready)return alert(t("no_fb"));
+  const n=$("nom").value.trim(),e=$("em").value.trim(),p=$("pw").value;if(!n)return alert(t("e_name"));
+  try{const c=await createUserWithEmailAndPassword(auth,e,p);await updateProfile(c.user,{displayName:n});
+    await setDoc(doc(db,"users",c.user.uid),{name:n,email:e,createdAt:serverTimestamp()});await sendEmailVerification(c.user);
+    user=auth.currentUser;subscribe();apply()}catch(x){fail(x)}
+};
+window.login=async()=>{if(!ready)return alert(t("no_fb"));try{await signInWithEmailAndPassword(auth,$("em").value.trim(),$("pw").value)}catch(x){fail(x)}};
+window.google=async()=>{
+  if(!ready)return alert(t("no_fb"));
+  try{const r=await signInWithPopup(auth,new GoogleAuthProvider());
+    if(getAdditionalUserInfo(r)?.isNewUser)await setDoc(doc(db,"users",r.user.uid),{name:r.user.displayName||"",email:r.user.email,createdAt:serverTimestamp()})}
+  catch(x){if(!["auth/popup-closed-by-user","auth/cancelled-popup-request"].includes(x.code))fail(x)}
+};
+window.logout=async()=>{await signOut(auth);view="home"};
+window.resend=async()=>{try{await sendEmailVerification(user);alert(t("sent"))}catch(x){alert(t("e_gen"))}};
+window.pickPhoto=inp=>{const f=inp.files[0];if(!f)return;const i=new Image();
+  i.onload=()=>{const r=Math.min(1,500/i.width),c=document.createElement("canvas");c.width=i.width*r;c.height=i.height*r;c.getContext("2d").drawImage(i,0,0,c.width,c.height);photo=c.toDataURL("image/jpeg",.6)};i.src=URL.createObjectURL(f)};
+window.publish=async()=>{
+  const titre=$("ti").value.trim(),prix=Number($("pr").value);if(!titre||!prix)return alert(t("need_f"));const ci=$("ci").value;if(!ci)return alert(t("need_city"));
+  try{const r=await addDoc(collection(db,"annonces"),{titre,prix,city:ci,delivery:$("dv").checked,cat:$("ca").value,desc:$("de").value,photo,ownerUid:user.uid,ownerName:user.displayName||"",createdAt:serverTimestamp()});
+    await setDoc(doc(db,"stats",r.id),{ownerUid:user.uid,views:0,favs:0});["ti","pr","de","ph"].forEach(i=>$(i).value="");$("dv").checked=false;$("ci").value="";photo="";go("home")}catch(x){alert(t("e_gen"))}
+};
+window.delAd=async id=>{
+  if(!confirm(t("confirm")))return;
+  try{for(const m of msgs.filter(m=>m.aid===id)){if(isAdmin())await deleteDoc(doc(db,"msgs",m.id))}await deleteDoc(doc(db,"stats",id)).catch(()=>{});await deleteDoc(doc(db,"annonces",id))}catch(e){alert(t("e_gen"))}
+};
+
+/* ---- Messagerie ---- */
+const mask=s=>s.replace(/(\+?\d[\s.\-]?){8,}/g,t("h_num")).replace(/\S+@\S+\.\S+/g,t("h_mail"));
+const adOf=id=>ads.find(a=>a.id===id);
+const other=(aid,buyerUid)=>user.uid===buyerUid?(adOf(aid)?.ownerName||"?"):(msgs.find(m=>m.aid===aid&&m.buyerUid===buyerUid)?.buyerName||"?");
+window.openChat=(aid,buyerUid)=>{
+  if(!user){alert(t("need_login"));return go("space")}
+  const a=adOf(aid);if(!a)return;
+  cur={aid,sellerUid:a.ownerUid,buyerUid:buyerUid||user.uid};
+  $("ct").textContent=a.titre+" · "+other(aid,cur.buyerUid);$("chat").style.display="flex";drawChat();
+};
+function drawChat(){
+  if(!cur)return;
+  const l=msgs.filter(m=>m.aid===cur.aid&&m.buyerUid===cur.buyerUid);
+  $("cm").innerHTML=l.map(m=>`<div class="m ${m.fromUid===user.uid?"me":""}">${esc(m.text)}</div>`).join("")||`<p class="mut">${t("first")}</p>`;
+  $("cm").scrollTop=1e7;
+}
+window.sendMsg=async()=>{
+  const x=mask($("cx").value.trim());if(!x||!cur)return;
+  const bn=cur.buyerUid===user.uid?(user.displayName||""):(msgs.find(m=>m.aid===cur.aid&&m.buyerUid===cur.buyerUid)?.buyerName||"");
+  try{await addDoc(collection(db,"msgs"),{aid:cur.aid,buyerUid:cur.buyerUid,buyerName:bn,sellerUid:cur.sellerUid,fromUid:user.uid,fromName:user.displayName||"",text:x,createdAt:serverTimestamp()});$("cx").value=""}catch(e){alert(t("e_gen"))}
+};
+window.closeChat=()=>{$("chat").style.display="none";cur=null};
+function drawMsgs(){
+  if(!user){$("msgs").innerHTML=`<div class="panel">${t("need_login")}<br><br><button class="btn" onclick="go('space')">${t("login")}</button></div>`;return}
+  const g=new Map();msgs.forEach(m=>g.set(m.aid+"|"+m.buyerUid,m));
+  const l=[...g.values()].sort((a,b)=>ms(b.createdAt)-ms(a.createdAt));
+  $("msgs").innerHTML=`<div class="sec"><h2>${t("messages")}</h2>`+(l.map(m=>`<button class="conv" onclick="openChat('${m.aid}','${m.buyerUid}')"><b>${esc(adOf(m.aid)?.titre||t("deleted"))}</b> · ${esc(other(m.aid,m.buyerUid))}<small>${esc(m.text)}</small></button>`).join("")||`<p class="mut">${t("no_conv")}</p>`)+`</div>`;
+}
+
+/* ---- Admin ---- */
+function drawAdmin(){
+  if(!isAdmin()){$("admin").innerHTML="";return}
+  const convs=new Set(msgs.map(m=>m.aid+"|"+m.buyerUid)).size,total=ads.reduce((s,a)=>s+(Number(a.prix)||0),0);
+  const nw=allUsers.filter(u=>ms(u.createdAt)>Date.now()-7*864e5).length;
+  const cnt={};CATS.forEach(k=>cnt[k]=ads.filter(a=>a.cat===k).length);const max=Math.max(1,...Object.values(cnt));
+  const sel={};ads.forEach(a=>sel[a.ownerName]=(sel[a.ownerName]||0)+1);
+  const topS=Object.entries(sel).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const topA=ads.map(a=>({a,n:msgs.filter(m=>m.aid===a.id).length})).filter(x=>x.n).sort((x,y)=>y.n-x.n).slice(0,5);
+  const none=`<p class="mut">${t("nothing")}</p>`;
+  $("admin").innerHTML=`<div class="sec"><div class="eb">ADMIN</div><h2>📊 ${t("admin")}</h2>
+  <div class="stats"><div class="stat s1"><b>${allUsers.length}</b>${t("users")}</div><div class="stat s2"><b>${ads.length}</b>${t("ads")}</div><div class="stat s3"><b>${msgs.length}</b>${t("msgn")}</div><div class="stat s4"><b>${convs}</b>${t("convs")}</div><div class="stat s5"><b>${nw}</b>${t("new7")}</div><div class="stat s6"><b>${total.toLocaleString("fr-FR")}</b>${t("value")}</div></div></div>
+  <div class="panel"><h2>${t("by_cat")}</h2>${CATS.map(k=>`<div class="row" style="border:0;padding:0"><span>${ICON[k]} ${t(k)}</span><b>${cnt[k]}</b></div><div class="bar" style="width:${Math.round(cnt[k]/max*100)}%;background:${COL[k]}"></div>`).join("")}</div>
+  <div class="panel"><h2>${t("sellers")}</h2>${topS.map(([n,c])=>`<div class="row"><span>👤 ${esc(n)}</span><b>${c}</b></div>`).join("")||none}</div>
+  <div class="panel"><h2>${t("contacted")}</h2>${topA.map(x=>`<div class="row"><span>${esc(x.a.titre)}</span><b>${x.n}</b></div>`).join("")||none}</div>
+  <div class="panel"><h2>${t("moderate")}</h2>${ads.map(a=>`<div class="row"><span>${esc(a.titre)}<br><span class="mut">${esc(a.ownerName)}</span></span><button class="btn red" onclick="delAd('${a.id}')">${t("del")}</button></div>`).join("")||none}</div>`;
+}
+/* ---- Centres d'intérêt + carrousel ---- */
+let sel=new Set(),lastSig="",paused=0;
+window.openInt=()=>{if($("int").style.display==="flex")return;sel=new Set(interests);drawInt();$("int").style.display="flex"};
+function drawInt(){
+  $("it").textContent=t("int_t");$("is").textContent=t("int_sub");$("ib").textContent=t("int_save");$("il").textContent=t("int_skip");
+  $("ig").innerHTML=CATS.map(c=>`<button class="cat ${sel.has(c)?"on":""}" onclick="togInt('${c}')"><span>${ICON[c]}</span>${t(c)}</button>`).join("");
+}
+window.togInt=c=>{sel.has(c)?sel.delete(c):sel.add(c);drawInt()};
+async function storeInt(a){try{await setDoc(doc(db,"users",user.uid),{interests:a},{merge:true});$("int").style.display="none"}catch(e){alert(t("e_gen"))}}
+window.saveInt=()=>storeInt([...sel]);
+window.skipInt=()=>storeInt(interests);
+function drawFor(){
+  const sec=$("forsec"),car=$("car");
+  const l=user&&interests.length?ads.filter(a=>interests.includes(a.cat)&&a.ownerUid!==user.uid).slice(0,10):[];
+  if(!l.length){sec.style.display="none";lastSig="";return}
+  sec.style.display="block";
+  const sig=lang+l.map(a=>a.id).join();if(sig===lastSig)return;lastSig=sig;
+  car.innerHTML=l.map(a=>`<div class="rc" onclick="openDet('${a.id}')">${a.photo?`<img src="${a.photo}" alt="">`:`<div class="ph">${ICON[a.cat]||"🛍️"}</div>`}<div class="rb"><h3>${esc(a.titre)}</h3><div class="pr">${esc(a.prix)} HTG</div><div class="mut">${a.city?"📍 "+cityName(a.city)+" · ":""}${t(a.cat)}</div>${a.delivery?`<span class="dl">🚚 ${t("deliv")}</span>`:""}</div></div>`).join("");
+  car.scrollLeft=0;
+}
+$("car").addEventListener("pointerdown",()=>paused=Date.now()+6000);
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)setInterval(()=>{
+  const car=$("car");
+  if(view!=="home"||document.hidden||Date.now()<paused||car.children.length<2)return;
+  const w=car.children[0].offsetWidth+12,end=car.scrollLeft+car.clientWidth>=car.scrollWidth-4;
+  car.scrollTo({left:end?0:(Math.round(car.scrollLeft/w)+1)*w,behavior:"smooth"});
+},3000);
+/* ---- Favoris, détail, tableau de bord ---- */
+let detId=null;
+const heart=id=>favs.includes(id)?"❤️":"🤍";
+window.toggleFav=async id=>{
+  if(!user){alert(t("need_login"));return go("space")}
+  const has=favs.includes(id);
+  try{await setDoc(doc(db,"users",user.uid),{favs:has?arrayRemove(id):arrayUnion(id)},{merge:true});
+    updateDoc(doc(db,"stats",id),{favs:increment(has?-1:1)}).catch(()=>{})}catch(e){alert(t("e_gen"))}
+};
+window.openDet=id=>{
+  const a=adOf(id);if(!a)return;detId=id;const k="v_"+id;
+  if(!(user&&a.ownerUid===user.uid)&&!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");updateDoc(doc(db,"stats",id),{views:increment(1)}).catch(()=>{})}
+  $("det").style.display="flex";drawDet();$("det").scrollTop=0;
+};
+window.closeDet=()=>{$("det").style.display="none";detId=null};
+window.contact=id=>{closeDet();openChat(id)};
+function drawDet(){
+  if(!detId)return;
+  const a=adOf(detId);if(!a){closeDet();return}
+  const mine=user&&a.ownerUid===user.uid;
+  $("dt").textContent=a.titre;
+  $("db2").innerHTML=`${a.photo?`<img class="dimg" src="${a.photo}" alt="">`:`<div class="ph" style="aspect-ratio:16/9">${ICON[a.cat]||"🛍️"}</div>`}<div class="dbody"><h2 style="margin:0;font-size:22px">${esc(a.titre)}</h2><div class="pr">${esc(a.prix)} HTG</div><div><span class="tag">${t(a.cat)}</span> ${a.delivery?`<span class="dl">🚚 ${t("deliv")}</span>`:""}</div><div class="mut">${a.city?"📍 "+cityName(a.city)+" · ":""}${t("by")} ${esc(a.ownerName)}</div><p style="margin:0;line-height:1.6">${esc(a.desc)}</p>${mine?`<p class="mut">${t("your_ad")}</p>`:`<div class="dact"><button class="btn navy" onclick="toggleFav('${a.id}')">${heart(a.id)} ${t("fav")}</button><button class="btn" onclick="contact('${a.id}')">💬 ${t("contact")}</button></div>`}</div>`;
+}
+function drawFavs(){
+  const e=$("favl");if(!e)return;
+  e.innerHTML=ads.filter(a=>favs.includes(a.id)).map(a=>`<div class="row" onclick="openDet('${a.id}')" style="cursor:pointer"><span>${esc(a.titre)}<br><span class="pr">${esc(a.prix)} HTG</span></span><span>❤️</span></div>`).join("")||`<p class="mut">${t("no_favs")}</p>`;
+}
+function drawDash(){
+  const e=$("dash");if(!e||!user)return;
+  const my=ads.filter(a=>a.ownerUid===user.uid),sv=a=>statsMap[a.id]||{};
+  const cv=a=>new Set(msgs.filter(m=>m.aid===a.id).map(m=>m.buyerUid)).size;
+  const sum=f=>my.reduce((n,a)=>n+f(a),0);
+  e.innerHTML=`<div class="stats"><div class="stat s1"><b>${sum(a=>sv(a).views||0)}</b>${t("views")}</div><div class="stat s5"><b>${sum(a=>sv(a).favs||0)}</b>${t("favs_n")}</div><div class="stat s3"><b>${sum(cv)}</b>${t("contacts")}</div><div class="stat s2"><b>${my.length}</b>${t("ads")}</div></div>`+(my.map(a=>`<div class="row"><span>${esc(a.titre)}${a.delivery?" 🚚":""}</span><span class="mut">👁 ${sv(a).views||0} · ❤️ ${sv(a).favs||0} · 💬 ${cv(a)}</span></div>`).join("")||`<p class="mut">${t("none")}</p>`);
+}
+function drawCities(){$("cf").innerHTML=`<option value="all">${t("all_cities")}</option>`+cityOpts();$("cf").value=cityF}
+window.setCity=v=>{cityF=v;drawList()};
+apply();
+</script>
+</body>
+</html>
